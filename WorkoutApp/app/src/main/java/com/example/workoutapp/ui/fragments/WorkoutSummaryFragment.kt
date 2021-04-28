@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.example.workoutapp.R
-import com.example.workoutapp.ui.viewmodels.MainViewModel
 
 
-class ProfileFragment : Fragment() {
+class WorkoutSummaryFragment : Fragment() {
+
 
 
     override fun onCreateView(
@@ -18,7 +17,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_workout_summary, container, false)
     }
 
 

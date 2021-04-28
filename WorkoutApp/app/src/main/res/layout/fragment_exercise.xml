@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="exercise"
+            type="com.example.workoutapp.database.models.Exercise" />
+
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.ExerciseFragment">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        tools:src="@drawable/ll_l"
+        android:id="@+id/gif"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gif"
+        android:visibility="gone"
+        android:id="@+id/restRoot"
+
+        android:layout_centerHorizontal="true">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:text="Ready To Go!"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:id="@+id/header"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_centerHorizontal="true"
+        tools:text="Side Lateral Lunges"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:text="@{exercise.name}"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:id="@+id/title"
+        android:textAllCaps="true"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        >
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:trackThickness="50dp"
+         android:indeterminate="false"
+
+        android:id="@+id/progressBar"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="32sp"
+        android:id="@+id/timerTv"
+        android:textColor="@color/black"
+        tools:text="10" />
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/exerciseRoot"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_below="@id/gif">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/secondsPassedTv"
+            android:textSize="42sp"
+            tools:text="0''"
+            android:layout_marginBottom="5dp"
+            android:textStyle="bold"
+            android:layout_above="@id/exerciseTitle"
+            android:layout_marginStart="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/exerciseTitle"
+            android:layout_toEndOf="@id/secondsPassedTv"
+            android:id="@+id/totalDurationTv"
+            tools:text="/40''"
+            android:textSize="35sp"
+            android:layout_marginBottom="5dp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Side Lateral Lunges"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:text="@{exercise.name}"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/exerciseTitle"
+            android:layout_above="@id/exerciseBarRoot"
+            android:textAllCaps="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/exerciseBarRoot">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:trackThickness="100dp"
+            android:id="@+id/exerciseProgressBar"
+            app:trackColor="@color/white"/>
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_baseline_pause_24"
+                android:layout_centerInParent="true"
+                android:elevation="10dp"
+                android:background="@android:color/transparent"
+                android:id="@+id/pauseExerciseBtn"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
+</layout>

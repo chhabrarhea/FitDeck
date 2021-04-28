@@ -2,7 +2,7 @@ package com.example.workoutapp.database.models
 
 import com.example.workoutapp.R
 
-object Constants  {
+object RoutineData  {
     private fun getObliqueExercises():ArrayList<Exercise>{
         val list=ArrayList<Exercise>()
         list.add(Exercise(1, "Side Plank", "Lie on your left side with your right leg stacked on top of your left leg, and your left forearm on the ground with your elbow underneath your shoulder.Your body should form a straight line from head to feet that makes about a 45-degree angle with the ground. Raise your right arm up toward the ceiling without letting your hips dip.", R.drawable.sp_o, isCompleted = false, isOngoing = false, 30))
@@ -19,8 +19,7 @@ object Constants  {
         val list=ArrayList<Exercise>()
         list.add(Exercise(1,"Jumping Jacks","Start in a standing position with your arms resting at your sides. Slightly bend your knees and jump your legs out so they’re a little more than shoulder-width apart. At the same time, thrust your arms out and over your head.",R.drawable.jj_fb,isCompleted = false,isOngoing = false,30))
         list.add(Exercise(2,"Burpees","Stand with your feet shoulder-width apart. In one fluid motion, lower your body into a squat, place your hands on the ground in front of your feet, and jump your feet back so you land in a plank position. Then jump to return your feet to near your hands and complete a powerful jump straight up into the air.",R.drawable.b_fb,isCompleted = false,isOngoing = false,35))
-        list.add(Exercise(3,"Squat Jumps","With your feet shoulder-width apart, lower your body into a squat position. Keep your core tight and launch into an explosive jump. Land lightly on your feet and immediately lower into a squat again.",
-            R.drawable.sqj_fb,isCompleted = false,isOngoing = false,40))
+        list.add(Exercise(3,"Squat Jumps","With your feet shoulder-width apart, lower your body into a squat position. Keep your core tight and launch into an explosive jump. Land lightly on your feet and immediately lower into a squat again.", R.drawable.sqj_fb,isCompleted = false,isOngoing = false,40))
         list.add(Exercise(4,"Skater Jumps","With your right foot planted, cross your left leg behind you and out to your right side. Simultaneously, swing your right arm out to about shoulder height and your left arm across your body reaching toward your right hip. Then jump to your left and repeat the movement on your left side.",R.drawable.skj_fb,isCompleted = false,isOngoing = false,30))
         list.add(Exercise(5,"Plank Jumps","Begin in a plank position with your wrists in line with your shoulders and your body extended in a straight line behind you. Your feet should be planted together on the floor. Jump your legs out wide, and then jump them back together at a quick pace.",R.drawable.pj_fb,isCompleted = false,isOngoing = false,30))
         list.add(Exercise(6,"High Knees","From a standing position, lift your left knee into your chest. Swiftly switch your legs. At a nonstop pace, keep alternating your knees and move your arms in a running motion.",R.drawable.hk_fb,isCompleted = false,isOngoing = false,40))
@@ -32,14 +31,16 @@ object Constants  {
         list.add(Exercise(2,"Dumbell Dead Lift","Hinge forward at the hips to lower your hands down the front of your legs, keeping the weights close to your body and tilting your back and upper body forward. Keep your back flat and maintain a slight bend in your knees.",R.drawable.dd_l,isCompleted = false,isOngoing = false,40))
         list.add(Exercise(3,"Alternating Lateral Lunge","Start standing with feet together. Step your right leg wide out to your right side, bending the right knee as your foot touches the ground. Squeeze your inner thighs together to push off of your right foot and return to standing.",R.drawable.ll_l,isCompleted = false,isOngoing = false,35))
         list.add(Exercise(4,"Calf Raises","Stand with your feet shoulder-width apart and your toes pointing straight ahead. Use your calf muscles to lift your heels off the floor. Pause at the top and then lower to the ground. ",R.drawable.cr_l,isCompleted = false,isOngoing = false,30))
-        list.add(Exercise(5,"Reverse Lung","Start standing with feet together. Step your right foot directly behind you. Lower your hips and drop your right knee and your right heel is lifted off the ground. Squeeze your glutes, quads, and calves as you press your left heel into the ground and bring your right leg forward to return to standing.",R.drawable.rl_l,isCompleted = false,isOngoing = false,30))
+        list.add(Exercise(5,"Reverse Lunges","Start standing with feet together. Step your right foot directly behind you. Lower your hips and drop your right knee and your right heel is lifted off the ground. Squeeze your glutes, quads, and calves as you press your left heel into the ground and bring your right leg forward to return to standing.",R.drawable.rl_l,isCompleted = false,isOngoing = false,30))
         list.add(Exercise(6,"Sumo Squats","Start by standing with your feet wider than hip-width apart and your toes pointed out at an angle of about 45 degrees. Bend your knees and lower your hips into a wide squat until your thighs are parallel to the ground, keeping chest lifted. Pause at the bottom and then push through your heels to return to standing. ",R.drawable.ss_l,isCompleted = false,isOngoing = false,35))
-        list.add(Exercise(7,"Burpees","Stand with your feet shoulder-width apart. In one fluid motion, lower your body into a squat, place your hands on the ground in front of your feet, and jump your feet back so you land in a plank position. Then jump to return your feet to near your hands and complete a powerful jump straight up into the air.",R.drawable.b_l,isCompleted = false,isOngoing = false,40))
+        list.add(Exercise(7,"Burpees","Stand with your feet shoulder-width apart. In one fluid motion, lower your body into a squat, place your hands on the ground in front of your feet, and jump your feet back so you land in a plank position.\nThen jump to return your feet to near your hands and complete a powerful jump straight up into the air.",R.drawable.b_l,isCompleted = false,isOngoing = false,40))
         return list
     }
 
-    val obliques=Routine(1,"Stronger Obliques","","The obliques are major muscles in the abdominal area.These muscles work together to control movement in the spine, rib cage, and pelvis. You can actually do oblique-strengthening exercises every single day and not over-train.",70,21, getObliqueExercises())
-    val fatBurning=Routine(2,"Fat Burning","","Exercise at a comfortable but challenging intensity for optimal fat burning. The more muscle you have, the more fat your body is going to burn at rest. Try to knock this out two or three times per week.",80,30, getFatBurningExercises())
-    val legRoutine=Routine(3,"Legs","","You need leg strength to move around effectively and support good posture standing up.Strong leg and glute muscles will also help prevent injuries. We suggest doing this workout two to three times per week",80,10, getLegExercises())
+    private val obliques=Routine(1,"Stronger Obliques",R.drawable.obliques_header,"The obliques work together to control movement in the spine, rib cage, and pelvis.",70,21, getObliqueExercises(),"#fa8d7c")
+    private val fatBurning=Routine(2,"Fat Burning",R.drawable.fatburning_header,"Comfortable but challenging intensity for optimal fat burning.",80,30, getFatBurningExercises(),"#a4d3c3")
+    private val legRoutine=Routine(3,"Legs",R.drawable.legs_header,"Target your thighs and calves for well defined legs.",80,10, getLegExercises(),"#4cc3bb")
+    private val running=Routine(0,"Running",R.drawable.running,"",0,0,ArrayList(),"#4c7c94")
+    val routines=ArrayList<Routine>(listOf(obliques, fatBurning, legRoutine, running))
 }
 

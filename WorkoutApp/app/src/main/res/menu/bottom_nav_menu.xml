@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<item android:title="Train"
+    android:id="@+id/homeFragment"
+    android:icon="@drawable/ic_fire"
+    />
+    <item android:title="History"
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic_clipboard" />
+    <item
+        android:title="Stats"
+        android:id="@+id/statisticsFragment"
+        android:icon="@drawable/ic_statistics"
+        />
+    <item
+        android:title="Me"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:id="@+id/profileFragment"
+        />
 </menu>

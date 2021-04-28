@@ -3,10 +3,11 @@ package com.example.workoutapp.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.workoutapp.database.models.Workout
 
-@Database(entities = [Workout::class],version = 1)
+@Database(entities = [Workout::class],version = 1,exportSchema = false)
 @TypeConverters(Converter::class)
-abstract  class Database : RoomDatabase() {
+abstract  class WorkoutDatabase : RoomDatabase() {
 
         abstract fun getRunDao(): WorkoutDAO
     }

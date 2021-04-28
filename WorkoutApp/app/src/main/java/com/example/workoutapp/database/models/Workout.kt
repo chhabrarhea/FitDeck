@@ -1,4 +1,4 @@
-package com.example.workoutapp.database
+package com.example.workoutapp.database.models
 
 import android.graphics.Bitmap
 import androidx.annotation.NonNull
