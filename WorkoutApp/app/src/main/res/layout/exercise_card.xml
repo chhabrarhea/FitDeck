@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="exercise"
+            type="com.example.workoutapp.database.models.Exercise" />
+    </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -11,15 +16,19 @@
         android:paddingHorizontal="15dp"
         android:id="@+id/relativeRoot">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:id="@+id/linear"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/exerciseGif"
             android:orientation="vertical">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     tools:text="SQUATS"
+    android:text="@{exercise.name}"
     android:id="@+id/exerciseName"
     android:textColor="@color/black"
     android:textStyle="bold"
@@ -28,18 +37,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/exerciseName"
-        android:text="00:40"
+        tools:text="00:40"
         android:id="@+id/duration"/>
         </LinearLayout>
-    <pl.droidsonroids.gif.GifImageView
+    <ImageView
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:scaleType="fitXY"
-        android:src="@drawable/ll_l"
-        android:id="@+id/exerciseGif"/>
+        imageUrl="@{exercise.image}"
+        isGif="@{exercise.isGif}"
+        android:id="@+id/exerciseGif"
+        android:contentDescription="@string/running" />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"

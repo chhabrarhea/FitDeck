@@ -53,7 +53,6 @@ class RoutineDetailFragment : Fragment(),AppBarLayout.OnOffsetChangedListener {
         val alertDialogBuilder=MaterialAlertDialogBuilder(requireContext())
         val alertDialogBinding=ExerciseDetailDialogBinding.inflate(layoutInflater,null,false)
         alertDialogBuilder.setView(alertDialogBinding.root)
-        alertDialogBinding.gif.setImageResource(exercise.image)
         alertDialogBinding.exercise=exercise
         val alertDialog=alertDialogBuilder.create()
         alertDialogBinding.closeButton.setOnClickListener { alertDialog.dismiss() }

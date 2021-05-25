@@ -2,7 +2,9 @@ package com.example.workoutapp.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.workoutapp.database.models.Calories
 import com.example.workoutapp.database.models.Workout
+import java.util.*
 
 @Dao
 interface WorkoutDAO {
@@ -39,4 +41,13 @@ interface WorkoutDAO {
 
     @Query("SELECT AVG(avgSpeedInKMH) FROM workout_table")
     fun getTotalAvgSpeed(): LiveData<Float>
+
+    @Query("Select * from workout_table where timestamp between :start AND :end")
+   suspend fun getWorkoutsBetween(start: Date, end:Date):List<Workout>
+
+   @Query("SELECT timestamp from workout_table where  timestamp between :start AND :end ")
+   suspend fun getWeeklyWorkouts(start:Date,end: Date):List<Date>
+
+   @Query("Select sum(caloriesBurned) as calories,relativeDate from workout_table group by relativeDate")
+   suspend fun getDailyCalories():List<Calories>
 }

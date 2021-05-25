@@ -1,46 +1,79 @@
 package com.example.workoutapp.other
 
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.workoutapp.R
-import kotlinx.android.synthetic.main.fragment_routine_detail.view.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import org.w3c.dom.Text
+
 
 class DataBindingAdapters {
-    companion object{
+    companion object {
         @BindingAdapter("android:loadImageWithGlide")
         @JvmStatic
-        fun loadImage(imageView: ImageView,drawable:Int){
-            val context=imageView.context
-          Glide.with(context).load(ContextCompat.getDrawable(context,drawable)).into(imageView)
-        }
-
-        @BindingAdapter("android:setToolbarColor")
-        @JvmStatic
-        fun setToolbarColor(toolbar: Toolbar,color:String){
-            toolbar.setBackgroundColor(Color.parseColor(color))
+        fun loadImage(imageView: ImageView, image:String) {
+            val context = imageView.context
+            val ref=Firebase.storage.reference.child("headers").child(image)
+            Glide.with(context).load(ref).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView)
         }
 
         @BindingAdapter("android:setIntegerText")
         @JvmStatic
-        fun setText(textView: TextView,text:Int){
-            if(text==0)
+        fun setText(textView: TextView, text: Int) {
+            if (text == 0)
                 return
-            var t=text.toString()
-            if(textView.id== R.id.duration){
-                t+=" minutes"}
-            textView.text= t
+            var t = text.toString()
+            if (textView.id == R.id.duration) {
+                t += " minutes"
+            }
+            textView.text = t
         }
 
         @BindingAdapter("android:setButtonBackgroundColor")
         @JvmStatic
-        fun setColor(button: Button,color: String){
+        fun setColor(button: Button, color: String) {
             button.setBackgroundColor(Color.parseColor(color))
+        }
+
+        @BindingAdapter(value = ["imageUrl", "isGif"])
+        @JvmStatic
+        fun loadGif(imageView: ImageView, imageUrl: String,isGif:Boolean) {
+            val ref=Firebase.storage.reference.child("gifs").child(imageUrl)
+            if(isGif)
+            Glide.with(imageView.context).asGif().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).load(ref).into(imageView)
+            else
+                Glide.with(imageView.context).load(ref).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(imageView)
+        }
+
+        @BindingAdapter("android:setTags")
+        @JvmStatic
+        fun setTag(view: View, tag:Int){
+            view.tag=tag
+        }
+        @BindingAdapter("android:setTextColor")
+        @JvmStatic
+        fun setTextColor(view:View,color: String){
+            if(view is TextView)
+            view.setTextColor(Color.parseColor(color))
+            if(view is CircularProgressIndicator)
+                view.setIndicatorColor(Color.parseColor(color))
+            if (view is LinearProgressIndicator)
+                view.setIndicatorColor(Color.parseColor(color))
+            if(view is FloatingActionButton)
+                view.backgroundTintList= ColorStateList.valueOf(Color.parseColor(color))
+
+
         }
 
     }

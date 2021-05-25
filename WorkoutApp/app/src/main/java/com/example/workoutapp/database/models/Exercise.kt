@@ -4,10 +4,11 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Exercise(val id: Int,
+class Exercise(
                val name: String,
                val desc: String,
-              val image:Int,
-               var isCompleted:Boolean,
-               var isOngoing:Boolean,
-               val duration: Int):Parcelable
+              val image:String,
+               val duration: Int,
+               val reps:Int,
+               val isGif:Boolean
+):Parcelable

@@ -21,7 +21,6 @@
                 android:id="@+id/header"
                 android:clickable="false"
                 android:layout_height="150dp"
-                android:src="@drawable/fatburning_header"
                 android:scaleType="fitXY"
                 android:contentDescription="@string/running" />
 

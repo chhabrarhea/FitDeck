@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 class Routine(
     val id: Int,
     val name: String,
-    val image:Int,
+    val image:String,
     val desc: String,
     val caloriesBurned: Int,
     val duration: Int,

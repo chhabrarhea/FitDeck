@@ -6,17 +6,35 @@
         <variable
             name="exercise"
             type="com.example.workoutapp.database.models.Exercise" />
+        <variable
+            name="routine"
+            type="com.example.workoutapp.database.models.Routine" />
 
     </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ExerciseFragment">
-
-    <pl.droidsonroids.gif.GifImageView
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/countdownImage"
+        android:visibility="gone"
+        android:src="@drawable/avd_countdown"
+        android:layout_centerInParent="true"/>
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:trackThickness="10dp"
+        android:max="@{routine.exercises.size()}"
+        android:id="@+id/routineProgressIndicator"
+        app:trackColor="@color/white"/>
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        tools:src="@drawable/ll_l"
+        android:contentDescription="@string/gif"
+        android:layout_below="@id/routineProgressIndicator"
         android:id="@+id/gif"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +42,6 @@
         android:layout_below="@id/gif"
         android:visibility="gone"
         android:id="@+id/restRoot"
-
         android:layout_centerHorizontal="true">
     <TextView
         android:layout_width="wrap_content"
@@ -33,6 +50,7 @@
         android:textSize="40sp"
         android:layout_centerHorizontal="true"
         android:text="Ready To Go!"
+        android:setTextColor="@{routine.color}"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:id="@+id/header"
@@ -61,11 +79,11 @@
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:trackThickness="50dp"
+        app:trackThickness="70dp"
          android:indeterminate="false"
-
-        android:id="@+id/progressBar"
-        />
+        android:setTextColor="@{routine.color}"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/progressBar"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,6 +110,7 @@
             android:id="@+id/secondsPassedTv"
             android:textSize="42sp"
             tools:text="0''"
+            android:setTextColor="@{routine.color}"
             android:layout_marginBottom="5dp"
             android:textStyle="bold"
             android:layout_above="@id/exerciseTitle"
@@ -123,13 +142,14 @@
             android:textAllCaps="true"/>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_alignParentBottom="true"
             android:id="@+id/exerciseBarRoot">
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:trackThickness="100dp"
+            android:setTextColor="@{routine.color}"
             android:id="@+id/exerciseProgressBar"
             app:trackColor="@color/white"/>
             <ImageButton
@@ -139,8 +159,18 @@
                 android:src="@drawable/ic_baseline_pause_24"
                 android:layout_centerInParent="true"
                 android:elevation="10dp"
+                android:visibility="gone"
                 android:background="@android:color/transparent"
                 android:id="@+id/pauseExerciseBtn"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_check_24"
+                android:visibility="gone"
+                android:setTextColor="@{routine.color}"
+                android:layout_centerInParent="true"
+                android:id="@+id/repsFab"
+                android:contentDescription="@string/app_name" />
 
         </RelativeLayout>
     </RelativeLayout>

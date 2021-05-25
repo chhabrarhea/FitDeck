@@ -11,12 +11,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-<pl.droidsonroids.gif.GifImageView
+<ImageView
     android:layout_width="400dp"
     android:layout_height="200dp"
     android:id="@+id/gif"
-    android:layout_marginTop="10dp"
-    tools:src="@drawable/ll_l"/>
+    android:contentDescription="@string/gif"
+    imageUrl="@{exercise.image}"
+    isGif="@{exercise.isGif}"
+    android:layout_marginTop="10dp"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -27,7 +29,8 @@
         android:background="@android:color/transparent"
         android:tint="@color/black"
         android:padding="7dp"
-        android:id="@+id/closeButton"/>
+        android:id="@+id/closeButton"
+        android:contentDescription="@string/running" />
 
     <TextView
         android:layout_width="wrap_content"

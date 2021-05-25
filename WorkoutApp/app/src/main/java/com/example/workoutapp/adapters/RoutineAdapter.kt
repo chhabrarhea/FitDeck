@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.workoutapp.database.models.Routine
 import com.example.workoutapp.databinding.RoutineCardBinding
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class RoutineAdapter(private val list:List<Routine>, val context: Context, private val clickListener: (Routine) -> Unit): RecyclerView.Adapter<RoutineAdapter.VH>() {
     class VH(private val binding:RoutineCardBinding):RecyclerView.ViewHolder(binding.root) {
@@ -24,7 +26,8 @@ class RoutineAdapter(private val list:List<Routine>, val context: Context, priva
                 binding.duration.visibility=View.GONE
             binding.rootRelativeLayout.setOnClickListener { clickListener(routine) }
             binding.heading.text=routine.name
-           Glide.with(context).asBitmap().load(routine.image).into(binding.header)
+            val ref= Firebase.storage.reference.child("headers").child(routine.image)
+            Glide.with(context).load(ref).into(binding.header)
     }}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {

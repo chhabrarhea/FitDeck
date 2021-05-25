@@ -105,10 +105,9 @@ class RunTrackFragment : Fragment(),EasyPermissions.PermissionCallbacks {
                 distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
             }
             val avgSpeed = ((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10).roundToInt() / 10f
-            val dateTimestamp = Calendar.getInstance().timeInMillis
+            val dateTimestamp = Date(Calendar.getInstance().timeInMillis)
             val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
-            val run = Workout(0,bmp,dateTimestamp,avgSpeed,distanceInMeters,curTimeInMillis,caloriesBurned)
-            viewModel.insertWorkout(run)
+            viewModel.insertWorkout(0,dateTimestamp,curTimeInMillis,caloriesBurned,avgSpeed,distanceInMeters,bmp)
             Snackbar.make(
                 requireActivity().findViewById(R.id.rootView),
                 "Run saved successfully",
