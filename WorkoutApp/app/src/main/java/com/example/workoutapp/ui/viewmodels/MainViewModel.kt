@@ -2,7 +2,6 @@ package com.example.workoutapp.ui.viewmodels
 
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,8 +10,7 @@ import com.example.workoutapp.database.models.Workout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.time.Duration
-import java.time.Month
+import java.time.ZoneId
 import java.util.*
 import javax.inject.Inject
 
@@ -24,10 +22,14 @@ class MainViewModel@Inject constructor(
     val monthlyWorkouts= MutableLiveData<List<Workout>>()
     fun insertWorkout(category:Int,absoluteDate: Date,duration: Long,calories:Int,speed:Float=0f,dist:Int=0,img:Bitmap?=null){
         val date=Calendar.getInstance()
-        date.time=absoluteDate
+        val localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+        date.set(Calendar.DATE,localDate.dayOfMonth)
+        date.set(Calendar.YEAR,localDate.year)
+        date.set(Calendar.MONTH,localDate.monthValue)
         date.set(Calendar.HOUR,23)
         date.set(Calendar.MINUTE,59)
         date.set(Calendar.SECOND,59)
+        date.set(Calendar.MILLISECOND,59)
         val workout=Workout(category,img,absoluteDate,date.time,speed,dist,duration,calories)
         viewModelScope.launch {
             repository.insertWorkout(workout)

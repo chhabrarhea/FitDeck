@@ -25,13 +25,14 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RunViewHolder>() {
                 2->binding.routineNameTv.text="Legs"
                 3->binding.routineNameTv.text="Obliques"
                  4->binding.routineNameTv.text="Relaxing Yoga"
+
             }
             if(workout.category==0)
                 binding.icon.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_runner_history_icon))
             else
                 binding.icon.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_exercise_history_icon))
             binding.caloriesTv.text=workout.caloriesBurned.toString()
-            binding.durationTv.text=TrackingUtility.getFormattedStopWatchTime(workout.timeInMillis*60*1000)
+            binding.durationTv.text=TrackingUtility.getFormattedStopWatchTime(workout.timeInMillis)
             val dateFormat = SimpleDateFormat("MMM d, hh:mm aaa", Locale.getDefault())
                 binding.timeStampTv.text = dateFormat.format(workout.timestamp)
         }

@@ -16,8 +16,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ExerciseFragment">
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/countdownImage"
         android:visibility="gone"
         android:src="@drawable/avd_countdown"
@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         app:trackThickness="10dp"
+        android:setTextColor="@{routine.color}"
         android:max="@{routine.exercises.size()}"
         android:id="@+id/routineProgressIndicator"
         app:trackColor="@color/white"/>

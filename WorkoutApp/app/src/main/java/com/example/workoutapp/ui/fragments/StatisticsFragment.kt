@@ -2,7 +2,6 @@ package com.example.workoutapp.ui.fragments
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,6 @@ import com.example.workoutapp.R
 import com.example.workoutapp.databinding.FragmentStatisticsBinding
 import com.example.workoutapp.other.CustomAxisFormatter
 import com.example.workoutapp.ui.viewmodels.StatisticsViewModel
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.Legend.LegendForm
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import com.github.mikephil.charting.components.YAxis

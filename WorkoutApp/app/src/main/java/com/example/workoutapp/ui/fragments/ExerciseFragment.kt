@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
@@ -27,7 +28,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class ExerciseFragment : Fragment(), TextToSpeech.OnInitListener {
-
+    private lateinit var animatedCountdownDrawable:AnimatedVectorDrawableCompat
     private lateinit var binding: FragmentExerciseBinding
     private val viewModel: MainViewModel by viewModels()
     private var currentExercise = 0
@@ -84,6 +85,11 @@ class ExerciseFragment : Fragment(), TextToSpeech.OnInitListener {
             System.currentTimeMillis() - duration,
             routine.caloriesBurned
         )
+        val bundle=Bundle()
+        bundle.putInt("calories",routine.caloriesBurned)
+        bundle.putInt("exercises",routine.exercises.size)
+        bundle.putInt("duration",routine.duration)
+        findNavController().navigate(R.id.action_restFragment_to_workoutSummaryFragment,bundle)
     }
 
     private fun initializeExercise() {
@@ -108,10 +114,8 @@ class ExerciseFragment : Fragment(), TextToSpeech.OnInitListener {
     private fun initializeExerciseTimer() {
         speakOut("${exercises[currentExercise].name} ${exercises[currentExercise].duration} seconds")
         val duration = "/${exercises[currentExercise].duration}''"
-        val max = exercises[currentExercise].duration * 1000 + 1000
-        binding.exerciseProgressBar.progress = 0
+        val max = exercises[currentExercise].duration * 1000
         binding.totalDurationTv.text = duration
-        binding.secondsPassedTv.text = "0''"
         binding.exerciseProgressBar.max = max
         exerciseTimer.initializeTimer(max.toLong())
     }
@@ -125,40 +129,38 @@ class ExerciseFragment : Fragment(), TextToSpeech.OnInitListener {
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.finish_sound)
         mediaPlayer!!.isLooping = false
         binding.pauseExerciseBtn.setOnClickListener { exerciseTimer.pauseTimer() }
+        animatedCountdownDrawable = AnimatedVectorDrawableCompat.create(requireContext(), R.drawable.avd_countdown)!!
+        animatedCountdownDrawable.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
+            override fun onAnimationEnd(drawable: Drawable?) {
+                binding.countdownImage.visibility=View.GONE
+                initializeExerciseTimer()
+            }
+        })
+        animatedCountdownDrawable.setTintList(ColorStateList.valueOf(Color.parseColor(routine.color)))
+        binding.countdownImage.setImageDrawable(animatedCountdownDrawable)
         initializeRest()
     }
 
     private fun initializeCountdown() {
         binding.countdownImage.visibility=View.VISIBLE
-        val animated = AnimatedVectorDrawableCompat.create(binding.countdownImage.context, R.drawable.avd_countdown)
-        animated!!.setTintList(ColorStateList.valueOf(Color.parseColor(routine.color)))
-        animated.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
-            override fun onAnimationEnd(drawable: Drawable?) {
-                initializeExerciseTimer()
-                binding.countdownImage.visibility=View.GONE
-            }
-
-        })
-        binding.countdownImage.setImageDrawable(animated)
-        animated.start()
+        animatedCountdownDrawable.start()
     }
 
     private fun updateExerciseTimerUi(millisUntilFinished: Long) {
-        val max = exercises[currentExercise].duration * 1000 + 1000
+        val max = exercises[currentExercise].duration * 1000
         var left = millisUntilFinished.toInt()
-        if (left in 1001..1999)
+        if (left in 1..1000)
             mediaPlayer!!.start()
         left = max - left
         val passed = "${left / 1000}''"
         binding.secondsPassedTv.text = passed
-        if (millisUntilFinished.toInt() < 1000)
-            binding.exerciseProgressBar.progress = binding.exerciseProgressBar.max
-        else
-            binding.exerciseProgressBar.progress = left
+        binding.exerciseProgressBar.progress = left
     }
 
     private fun onExerciseFinished() {
         binding.exerciseRoot.visibility = View.GONE
+        binding.exerciseProgressBar.progress = 0
+        binding.secondsPassedTv.text = "0''"
         currentExercise++
         binding.routineProgressIndicator.incrementProgressBy(1)
         initializeRest()

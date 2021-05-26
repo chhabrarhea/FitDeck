@@ -64,5 +64,14 @@
     <fragment
         android:id="@+id/restFragment"
         android:name="com.example.workoutapp.ui.fragments.ExerciseFragment"
-        android:label="RestFragment" />
+        android:label="RestFragment" >
+        <action
+            android:id="@+id/action_restFragment_to_workoutSummaryFragment"
+            app:destination="@id/workoutSummaryFragment"
+            app:popUpTo="@id/routineDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutSummaryFragment"
+        android:name="com.example.workoutapp.ui.fragments.WorkoutSummaryFragment"
+        android:label="WorkoutSummaryFragment" />
 </navigation>

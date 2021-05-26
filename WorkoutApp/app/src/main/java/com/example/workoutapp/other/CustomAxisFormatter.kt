@@ -1,5 +1,6 @@
 package com.example.workoutapp.other
 
+import android.util.Log
 import com.example.workoutapp.database.models.Calories
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import java.text.SimpleDateFormat

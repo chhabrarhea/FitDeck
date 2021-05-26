@@ -2,11 +2,14 @@ package com.example.workoutapp.other
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.workoutapp.R
@@ -72,8 +75,6 @@ class DataBindingAdapters {
                 view.setIndicatorColor(Color.parseColor(color))
             if(view is FloatingActionButton)
                 view.backgroundTintList= ColorStateList.valueOf(Color.parseColor(color))
-
-
         }
 
     }
